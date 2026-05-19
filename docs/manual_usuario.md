@@ -1,53 +1,53 @@
-# User Manual
+# Manual de Usuario
 
-## Getting Started
+## Primeros Pasos
 
-### Initial Configuration
-When creating your account for the first time:
-1. Complete your user profile
-2. Configure notification preferences
-3. Familiarize yourself with the main dashboard
-4. Explore the basic functionalities
+### Configuración Inicial
+Al crear tu cuenta por primera vez:
+1. Completa tu perfil de usuario
+2. Configura las preferencias de notificación
+3. Familiarízate con el dashboard principal
+4. Explora las funcionalidades básicas
 
-### Main Navigation
-- **Dashboard:** Overview of your activity
-- **Settings:** Account and preferences settings
-- **Support:** Help center and contact
-- **Billing:** Payment and plan management
+### Navegación Principal
+- **Dashboard:** Vista general de tu actividad
+- **Configuración:** Ajustes de cuenta y preferencias
+- **Soporte:** Centro de ayuda y contacto
+- **Facturación:** Gestión de pagos y planes
 
-## Main Features
+## Funcionalidades Principales
 
-### Data Management
-- **Upload files:** Maximum 100MB per file
-- **Supported formats:** PDF, DOC, TXT, CSV
-- **Organization:** Use folders and tags
-- **Search:** Search by name, content, or tags
+### Gestión de Datos
+- **Subir archivos:** Máximo 100MB por archivo
+- **Formatos soportados:** PDF, DOC, TXT, CSV
+- **Organización:** Usa carpetas y etiquetas
+- **Búsqueda:** Busca por nombre, contenido o etiquetas
 
-### Notification Configuration
-You can configure:
-- Email notifications
-- Real-time alerts
-- Weekly summaries
-- Personalized reminders
+### Configuración de Notificaciones
+Puedes configurar:
+- Notificaciones por email
+- Alertas en tiempo real
+- Resúmenes semanales
+- Recordatorios personalizados
 
-### Security
-- Use two-factor authentication
-- Regularly review active sessions
-- Keep your password updated
-- Report suspicious activity
+### Seguridad
+- Usa autenticación de dos factores
+- Revisa regularmente los accesos activos
+- Mantén tu contraseña actualizada
+- Reporta actividad sospechosa
 
-## Basic Troubleshooting
+## Resolución de Problemas Básicos
 
-### Performance Issues
-If the application is slow:
-- Close other browser tabs
-- Clear your browser cache
-- Verify your internet connection
-- Restart the application
+### Problemas de Rendimiento
+Si la aplicación va lenta:
+- Cierra otras pestañas del navegador
+- Limpia el cache del navegador
+- Verifica tu conexión a internet
+- Reinicia la aplicación
 
-### Synchronization Issues
-For synchronization problems:
-- Verify your internet connection
-- Force a manual synchronization
-- Close and reopen the application
-- Contact support if it persists
+### Errores de Sincronización
+Para problemas de sincronización:
+- Verifica tu conexión a internet
+- Fuerza una sincronización manual
+- Cierra y abre la aplicación
+- Contacta soporte si persiste

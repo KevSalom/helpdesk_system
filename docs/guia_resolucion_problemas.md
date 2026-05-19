@@ -1,86 +1,86 @@
-# Troubleshooting Guide
+# Guía de Resolución de Problemas
 
-## Common Errors
+## Errores Comunes
 
-### Error 500 - Internal Server Error
-**Symptoms:** White page or error 500 message
-**Solution:**
-1. Reload the page (F5 or Ctrl+R)
-2. Wait 5-10 minutes and try again
-3. Clear your browser cache
-4. If it persists, our team is already working on fixing it
+### Error 500 - Error Interno del Servidor
+**Síntomas:** Página blanca o mensaje de error 500
+**Solución:**
+1. Recarga la página (F5 o Ctrl+R)
+2. Espera 5-10 minutos e intenta nuevamente
+3. Limpia el cache del navegador
+4. Si persiste, nuestro equipo ya está trabajando en solucionarlo
 
-**Server status:** You can check at status.company.com
+**Estado del servidor:** Puedes verificar en status.empresa.com
 
-### Error 404 - Page Not Found
-**Symptoms:** "Page not found" message
-**Solution:**
-- Verify the URL is correct
-- Return to the main dashboard
-- Use the navigation menu
-- Contact support if the link should work
+### Error 404 - Página No Encontrada
+**Síntomas:** Mensaje "Página no encontrada"
+**Solución:**
+- Verifica que la URL esté correcta
+- Regresa al dashboard principal
+- Usa el menú de navegación
+- Contacta soporte si el enlace debería funcionar
 
-### Slow Loading Issues
-**Symptoms:** The application takes a long time to load
-**Solution:**
-1. Verify your internet speed
-2. Close unnecessary browser tabs
-3. Temporarily disable browser extensions
-4. Try incognito mode
-5. Use a different browser
+### Problemas de Carga Lenta
+**Síntomas:** La aplicación tarda mucho en cargar
+**Solución:**
+1. Verifica tu velocidad de internet
+2. Cierra pestañas innecesarias del navegador
+3. Desactiva extensiones del navegador temporalmente
+4. Prueba en modo incógnito
+5. Usa un navegador diferente
 
-### Display Issues
-**Symptoms:** Misaligned elements or poor visibility
-**Solution:**
-- Update your browser to the latest version
-- Disable browser zoom (100%)
-- Clear your browser cache
-- Try incognito mode
+### Problemas de Visualización
+**Síntomas:** Elementos desalineados o que no se ven bien
+**Solución:**
+- Actualiza tu navegador a la última versión
+- Desactiva el zoom del navegador (100%)
+- Limpia el cache del navegador
+- Prueba en modo incógnito
 
-## Connectivity Issues
+## Problemas de Conectividad
 
-### No Internet Connection
-**Verification:**
-- Try opening other websites
-- Restart your router/modem
-- Verify network cables
-- Contact your internet provider
+### Sin Conexión a Internet
+**Verificación:**
+- Prueba abrir otros sitios web
+- Reinicia tu router/módem
+- Verifica cables de red
+- Contacta tu proveedor de internet
 
-### Corporate Firewall/Proxy
-If you are on a corporate network:
-- Contact your IT department
-- Request access to *.company.com
-- Verify ports 80 and 443
-- Consider using mobile connection temporarily
+### Firewall/Proxy Corporativo
+Si estás en una red corporativa:
+- Contacta tu departamento de IT
+- Solicita acceso a *.empresa.com
+- Verifica puertos 80 y 443
+- Considera usar conexión móvil temporalmente
 
-## Account Issues
+## Problemas de Cuenta
 
-### Suspended Account
-**Common causes:**
-- Pending payment
-- Violation of terms of service
-- Suspicious activity detected
+### Cuenta Suspendida
+**Causas comunes:**
+- Pago pendiente
+- Violación de términos de servicio
+- Actividad sospechosa detectada
 
-**Solution:**
-1. Check your email for notifications
-2. Verify your payment status
-3. Contact support immediately
+**Solución:**
+1. Revisa tu email para notificaciones
+2. Verifica el estado de tus pagos
+3. Contacta soporte inmediatamente
 
-### Lost Data
-**Immediate steps:**
-1. Do not make additional changes
-2. Check the recycle bin
-3. Search in all folders
-4. Contact support immediately with details
+### Datos Perdidos
+**Pasos inmediatos:**
+1. No hagas cambios adicionales
+2. Verifica la papelera de reciclaje
+3. Busca en todas las carpetas
+4. Contacta soporte inmediatamente con detalles
 
-## Emergency Contact
+## Contacto de Emergencia
 
-### Urgent Technical Support
-- **Email:** urgent@company.com
-- **Phone:** +1-800-SUPPORT
-- **Chat:** Available 24/7 in the application
+### Soporte Técnico Urgente
+- **Email:** urgente@empresa.com
+- **Teléfono:** +1-800-SUPPORT
+- **Chat:** Disponible 24/7 en la aplicación
 
-### Report Security Issues
-- **Email:** security@company.com
-- **Response:** Within 1 hour
-- **Investigation:** Maximum 24 hours
+### Reportar Problemas de Seguridad
+- **Email:** security@empresa.com
+- **Respuesta:** Dentro de 1 hora
+- **Investigación:** Máximo 24 horas
