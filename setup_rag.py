@@ -7,15 +7,13 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
-from config import * 
+from config import OPENAI_API_KEY, EMBEDDINGS_MODEL, CHROMADB_PATH, DOCS_PATH
 
 class DocumentProcessor:
-    """Procesador de documentos para el sistema RAG."""
-    
     def __init__(self, docs_path: str = "docs", chroma_path: str = "./chroma_db"):
         self.docs_path = Path(docs_path)
         self.chroma_path = Path(chroma_path)
-        self.embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL)
+        self.embeddings = OpenAIEmbeddings(model=EMBEDDINGS_MODEL, api_key=OPENAI_API_KEY)
         self.text_splitter = RecursiveCharacterTextSplitter(
             chunk_size=1000,
             chunk_overlap=200,
@@ -24,10 +22,8 @@ class DocumentProcessor:
         )
         
     def load_documents(self) -> List[Document]:
-        """Carga documentos markdown del directorio docs."""
         print(f"📚 Cargando documentos desde {self.docs_path}")
         
-        # Cargar archivos markdown
         loader = DirectoryLoader(
             str(self.docs_path),
             glob="*.md",
@@ -37,7 +33,6 @@ class DocumentProcessor:
         
         documents = loader.load()
         
-        # Enriquecer metadatos
         for doc in documents:
             filename = Path(doc.metadata["source"]).stem
             doc.metadata.update({
@@ -50,7 +45,6 @@ class DocumentProcessor:
         return documents
     
     def _get_doc_type(self, filename: str) -> str:
-        """Determina el tipo de documento basado en el nombre."""
         if "faq" in filename.lower():
             return "faq"
         elif "manual" in filename.lower():
@@ -61,16 +55,13 @@ class DocumentProcessor:
             return "general"
     
     def _generate_doc_id(self, content: str) -> str:
-        """Genera un ID único para el documento."""
         return hashlib.md5(content.encode()).hexdigest()[:8]
     
     def split_documents(self, documents: List[Document]) -> List[Document]:
-        """Divide documentos en chunks más pequeños."""
         print("✂️  Dividiendo documentos en chunks...")
         
         chunks = self.text_splitter.split_documents(documents)
         
-        # Agregar metadatos de chunk
         for i, chunk in enumerate(chunks):
             chunk.metadata.update({
                 "chunk_id": i,
@@ -81,15 +72,12 @@ class DocumentProcessor:
         return chunks
     
     def create_vectorstore(self, documents: List[Document]) -> Chroma:
-        """Crea el vectorstore con ChromaDB."""
         print("🔄 Creando vectorstore con ChromaDB...")
         
-        # Limpiar directorio anterior si existe
         if self.chroma_path.exists():
             import shutil
             shutil.rmtree(self.chroma_path)
         
-        # Crear vectorstore
         vectorstore = Chroma.from_documents(
             documents=documents,
             embedding=self.embeddings,
@@ -103,7 +91,6 @@ class DocumentProcessor:
         return vectorstore
     
     def load_existing_vectorstore(self) -> Chroma:
-        """Carga vectorstore existente."""
         if not self.chroma_path.exists():
             raise FileNotFoundError(f"Vectorstore no encontrado en {self.chroma_path}")
         
@@ -116,31 +103,25 @@ class DocumentProcessor:
         return vectorstore
     
     def setup_rag_system(self, force_rebuild: bool = False):
-        """Configura el sistema RAG completo."""
         print("🚀 Configurando sistema RAG...")
         
-        # Verificar si ya existe y no forzar rebuild
         if self.chroma_path.exists() and not force_rebuild:
             print("📦 Vectorstore existente encontrado")
             return self.load_existing_vectorstore()
         
-        # Cargar y procesar documentos
         documents = self.load_documents()
         if not documents:
             print("⚠️  No se encontraron documentos para procesar")
             return None
         
-        # Dividir documentos
         chunks = self.split_documents(documents)
         
-        # Crear vectorstore
         vectorstore = self.create_vectorstore(chunks)
         
         print("✅ Sistema RAG configurado exitosamente")
         return vectorstore
     
     def test_search(self, vectorstore: Chroma, query: str = "resetear contraseña"):
-        """Prueba la funcionalidad de búsqueda."""
         print(f"\n🔍 Probando búsqueda: '{query}'")
         
         results = vectorstore.similarity_search(query, k=3)
@@ -155,18 +136,14 @@ class DocumentProcessor:
 
 
 def main():
-    """Función principal para configurar RAG."""
     print("🎧 Configuración RAG - Helpdesk 2.0")
     print("=" * 40)
     
-    # Configurar procesador
     processor = DocumentProcessor(docs_path=DOCS_PATH, chroma_path=CHROMADB_PATH)
     
-    # Configurar sistema RAG
-    vectorstore = processor.setup_rag_system(force_rebuild= False)
+    vectorstore = processor.setup_rag_system(force_rebuild=False)
     
     if vectorstore:
-        # Probar búsquedas
         test_queries = [
             "resetear contraseña",
             "error 500",

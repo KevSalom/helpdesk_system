@@ -61,7 +61,8 @@ helpdesk_system/
 │   ├── faq.md
 │   ├── manual_usuario.md
 │   └── guia_resolucion_problemas.md
-└── chroma_db/          # Vectorstore (git ignored)
+├── chroma_db/          # Vectorstore (git ignored)
+└── .env.example        # Environment template
 ```
 
 ## Requirements
@@ -77,8 +78,12 @@ pip install -r requirements.txt
 
 ## Configuration
 
-Create a `.env` file with your API key:
+1. Copy the environment template:
+```bash
+cp .env.example .env
+```
 
+2. Edit `.env` and add your OpenAI API key:
 ```
 OPENAI_API_KEY=sk-your-key-here
 ```
