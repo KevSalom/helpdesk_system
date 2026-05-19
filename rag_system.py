@@ -1,6 +1,6 @@
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
-from langchain_core.retrievers.multi_query import MultiQueryRetriever
+from langchain_classic.retrievers.multi_query import MultiQueryRetriever
 from pathlib import Path
 import logging
 from langchain_openai import ChatOpenAI
