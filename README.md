@@ -1,103 +1,103 @@
-# Helpdesk 2.0 con RAG
+# Helpdesk 2.0 with RAG
 
-Sistema inteligente de helpdesk basado en LangGraph con búsqueda vectorial (RAG) usando ChromaDB.
+Intelligent helpdesk system based on LangGraph with vector search (RAG) using ChromaDB.
 
-## Descripción
+## Description
 
-Helpdesk 2.0 es un sistema de soporte técnico inteligente que utiliza:
-- **LangGraph** para orquestar el flujo de tickets
-- **ChromaDB** como base de datos vectorial para búsqueda semántica
-- **MultiQueryRetriever** para mejorar la precisión de las búsquedas
-- **Human-in-the-Loop** para escalado a agentes humanos
-- **Checkpointing** con SQLite para persistencia de estado
+Helpdesk 2.0 is an intelligent technical support system that uses:
+- **LangGraph** for orchestrating ticket flow
+- **ChromaDB** as vector database for semantic search
+- **MultiQueryRetriever** for improved search accuracy
+- **Human-in-the-Loop** for escalation to human agents
+- **Checkpointing** with SQLite for state persistence
 
-## Arquitectura
+## Architecture
 
 ```
-Usuario → Clasificación → RAG (ChromaDB) → Evaluación de Confianza
+User → Classification → RAG (ChromaDB) → Confidence Evaluation
                                                   ↓
-                              Confianza Alta → Respuesta Automática
-                              Confianza Baja → Escalado Humano
+                              High Confidence → Automatic Response
+                              Low Confidence → Human Escalation
 ```
 
-## Técnicas Utilizadas
+## Techniques Used
 
 ### 1. Retrieval Augmented Generation (RAG)
-- Búsqueda vectorial en base de conocimiento
-- MultiQueryRetriever para mayor cobertura
-- Cálculo de confianza basado en relevancia
+- Vector search in knowledge base
+- MultiQueryRetriever for broader coverage
+- Confidence calculation based on relevance
 
 ### 2. LangGraph State Management
-- Estado tipado con `TypedDict`
-- Checkpointing con SQLite
-- Interrupciones para espera de intervención humana
-- Streaming de eventos
+- Typed state with `TypedDict`
+- SQLite checkpointing
+- Interrupts for human intervention waiting
+- Event streaming
 
 ### 3. Human-in-the-Loop
-- Pausa del grafo para espera de respuesta
-- Actualización de estado con input humano
-- Continuación del flujo post-intervención
+- Graph pause for human response waiting
+- State update with human input
+- Flow continuation post-intervention
 
-## Estructura del Proyecto
+## Project Structure
 
 ```
 helpdesk_system/
-├── app.py              # Aplicación Streamlit
-├── graph.py            # Grafo de LangGraph
-├── rag_system.py       # Sistema RAG con ChromaDB
-├── setup_rag.py        # Configuración del vectorstore
-├── config.py           # Configuración
-├── docs/               # Documentación base de conocimiento
+├── app.py              # Streamlit application
+├── graph.py            # LangGraph workflow
+├── rag_system.py       # RAG system with ChromaDB
+├── setup_rag.py        # Vectorstore configuration
+├── config.py           # Configuration
+├── docs/               # Knowledge base documentation
 │   ├── faq.md
 │   ├── manual_usuario.md
 │   └── guia_resolucion_problemas.md
 └── chroma_db/          # Vectorstore (git ignored)
 ```
 
-## Requisitos
+## Requirements
 
 - Python 3.10+
 - OpenAI API Key
 
-## Instalación
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Configuración
+## Configuration
 
-Crear archivo `.env` con tu API key:
+Create a `.env` file with your API key:
 
 ```
 OPENAI_API_KEY=sk-your-key-here
 ```
 
-## Uso
+## Usage
 
-1. **Iniciar la aplicación:**
+1. **Start the application:**
 ```bash
 streamlit run app.py
 ```
 
-2. **Configurar RAG:**
-   - La primera vez, click en "Configurar RAG" en el sidebar
-   - Esto cargará los documentos de `docs/` al vectorstore
+2. **Configure RAG:**
+   - On first run, click "Configure RAG" in the sidebar
+   - This will load documents from `docs/` into the vectorstore
 
-3. **Crear tickets:**
-   - Ingresar consulta del problema
-   - El sistema clasificará automáticamente
-   - Respuesta automática o escalado a humano
+3. **Create tickets:**
+   - Enter the problem description
+   - The system will automatically classify
+   - Automatic response or human escalation
 
-4. **Intervenir en tickets:**
-   - Tickets escalados muestran contexto RAG
-   - Escribir respuesta o usar respuesta RAG como base
+4. **Handle escalated tickets:**
+   - Escalated tickets show RAG context
+   - Write a response or use the RAG response as base
 
-## Flujo del Sistema
+## System Flow
 
-1. 📝 Usuario envía consulta
-2. 🤖 Clasificación automática (automatico/escalado)
-3. 🔍 Búsqueda vectorial RAG
-4. 📊 Evaluación de confianza (>0.6 = automático)
-5. 👨‍💼 Escalado si confianza baja
-6. ✅ Respuesta final
+1. 📝 User submits query
+2. 🤖 Automatic classification (automatic/escalated)
+3. 🔍 RAG vector search
+4. 📊 Confidence evaluation (>0.6 = automatic)
+5. 👨‍💼 Escalation if confidence is low
+6. ✅ Final response
