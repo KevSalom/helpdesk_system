@@ -5,14 +5,12 @@ from setup_rag import DocumentProcessor
 from datetime import datetime
 import os
 
-# Configuración de página
 st.set_page_config(
-    page_title="Helpdesk 2.0 con RAG",
+    page_title="Helpdesk 2.0 with RAG",
     page_icon="🎧",
     layout="wide"
 )
 
-# Inicializar sesión
 if "helpdesk" not in st.session_state:
     st.session_state.helpdesk = crear_helpdesk()
     st.session_state.tickets = {}
@@ -24,7 +22,7 @@ def verificar_rag_setup():
 
 def configurar_rag():
     """Configura el sistema RAG."""
-    with st.spinner("🔧 Configurando sistema RAG..."):
+    with st.spinner("🔧 Configuring RAG system..."):
         processor = DocumentProcessor()
         vectorstore = processor.setup_rag_system(force_rebuild=True)
         return vectorstore is not None
@@ -49,7 +47,6 @@ def procesar_consulta(consulta: str, ticket_id: str):
     
     config = {"configurable": {"thread_id": ticket_id}}
     
-    # Procesar con streaming
     historial_procesamiento = []
     
     try:
@@ -62,109 +59,101 @@ def procesar_consulta(consulta: str, ticket_id: str):
                 if "historial" in salida and salida["historial"]:
                     historial_procesamiento.extend(salida["historial"])
         
-        # Obtener estado final
         estado_final = st.session_state.helpdesk.get_state(config)
         
         return estado_final.values, historial_procesamiento, config
         
     except Exception as e:
-        st.error(f"Error procesando consulta: {str(e)}")
+        st.error(f"Error processing query: {str(e)}")
         return None, [], None
 
 def main():
     """Aplicación principal."""
-    st.title("🎧 Helpdesk 2.0 con RAG + ChromaDB")
-    st.markdown("*Sistema inteligente con LangGraph y búsqueda vectorial*")
+    st.title("🎧 Helpdesk 2.0 with RAG + ChromaDB")
+    st.markdown("*Intelligent system with LangGraph and vector search*")
     
-    # Verificar configuración RAG
     rag_configurado = verificar_rag_setup()
     
-    # Sidebar con información y configuración
     with st.sidebar:
-        st.header("📊 Panel de Control")
-        st.metric("Tickets Activos", len(st.session_state.tickets))
+        st.header("📊 Control Panel")
+        st.metric("Active Tickets", len(st.session_state.tickets))
         
-        # Estado del sistema RAG
-        st.subheader("🔍 Estado RAG")
+        st.subheader("🔍 RAG Status")
         if rag_configurado:
-            st.success("✅ ChromaDB configurado")
+            st.success("✅ ChromaDB configured")
         else:
-            st.warning("⚠️ RAG no configurado")
-            if st.button("🚀 Configurar RAG"):
+            st.warning("⚠️ RAG not configured")
+            if st.button("🚀 Configure RAG"):
                 if configurar_rag():
-                    st.success("✅ RAG configurado exitosamente")
+                    st.success("✅ RAG configured successfully")
                     st.rerun()
                 else:
-                    st.error("❌ Error configurando RAG")
+                    st.error("❌ Error configuring RAG")
         
-        st.subheader("🔄 Flujo del Sistema")
+        st.subheader("🔄 System Flow")
         st.text("""
-1. 📝 Usuario envía consulta
-2. 🤖 Clasificación automática
-3. 🔍 Búsqueda vectorial RAG
-4. 📊 Evaluación de confianza
-5. 👨‍💼 Escalado si es necesario
-6. ✅ Respuesta final
+1. 📝 User submits query
+2. 🤖 Automatic classification
+3. 🔍 RAG vector search
+4. 📊 Confidence evaluation
+5. 👨‍💼 Escalation if needed
+6. ✅ Final response
         """)
         
-        st.subheader("⚙️ Configuración")
-        if st.button("🔄 Reconfigurar RAG"):
+        st.subheader("⚙️ Configuration")
+        if st.button("🔄 Reconfigure RAG"):
             if configurar_rag():
-                st.success("✅ RAG reconfigurado")
+                st.success("✅ RAG reconfigured")
                 st.rerun()
         
-        if st.button("🗑️ Limpiar Tickets"):
+        if st.button("🗑️ Clear Tickets"):
             st.session_state.tickets = {}
             st.rerun()
     
     if not rag_configurado:
-        st.warning("⚠️ El sistema RAG no está configurado. Usa el botón en la barra lateral para configurarlo.")
+        st.warning("⚠️ RAG system not configured. Use the sidebar button to configure it.")
         return
     
-    # Área principal
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        st.subheader("📝 Nueva Consulta")
+        st.subheader("📝 New Query")
         
-        # Ejemplos de consultas
-        with st.expander("💡 Ejemplos de consultas"):
+        with st.expander("💡 Query Examples"):
             ejemplos = [
-                "No puedo resetear mi contraseña",
-                "Error 500 en la aplicación",
-                "¿Cómo cancelo mi suscripción?",
-                "La aplicación va muy lenta",
-                "Problemas con la facturación"
+                "I can't reset my password",
+                "Error 500 in the application",
+                "How do I cancel my subscription?",
+                "The application is very slow",
+                "Billing problems"
             ]
             for ejemplo in ejemplos:
                 if st.button(f"📋 {ejemplo}", key=f"ej_{ejemplo}"):
                     st.session_state.consulta_ejemplo = ejemplo
         
         with st.form("nueva_consulta"):
-            usuario = st.text_input("👤 Usuario", placeholder="tu@email.com")
+            usuario = st.text_input("👤 User", placeholder="your@email.com")
             
             consulta_inicial = st.session_state.get("consulta_ejemplo", "")
             consulta = st.text_area(
-                "💬 Descripción del problema",
+                "💬 Problem Description",
                 value=consulta_inicial,
-                placeholder="Describe tu consulta o problema aquí...",
+                placeholder="Describe your query or problem here...",
                 height=100
             )
             
-            submitted = st.form_submit_button("🚀 Enviar Consulta")
+            submitted = st.form_submit_button("🚀 Submit Query")
             
             if submitted and consulta.strip():
-                # Limpiar ejemplo usado
                 if "consulta_ejemplo" in st.session_state:
                     del st.session_state.consulta_ejemplo
                 
                 ticket_id = crear_ticket_id()
                 
-                with st.spinner("🔄 Procesando consulta..."):
+                with st.spinner("🔄 Processing query..."):
                     resultado, historial, config = procesar_consulta(consulta, ticket_id)
                 
                 if resultado:
-                    # Guardar ticket
                     st.session_state.tickets[ticket_id] = {
                         "usuario": usuario,
                         "consulta": consulta,
@@ -174,90 +163,79 @@ def main():
                         "timestamp": datetime.now().strftime("%H:%M:%S")
                     }
                     
-                    st.success(f"✅ Ticket {ticket_id} creado")
+                    st.success(f"✅ Ticket {ticket_id} created")
                     st.rerun()
     
     with col2:
-        st.subheader("🎫 Tickets Recientes")
+        st.subheader("🎫 Recent Tickets")
         
         if not st.session_state.tickets:
-            st.info("No hay tickets activos")
+            st.info("No active tickets")
         else:
             for ticket_id, ticket_data in reversed(list(st.session_state.tickets.items())):
                 with st.expander(f"🎫 {ticket_id} - {ticket_data['timestamp']}", expanded=True):
-                    st.markdown(f"**👤 Usuario:** {ticket_data['usuario']}")
-                    st.markdown(f"**💬 Consulta:** {ticket_data['consulta'][:100]}...")
+                    st.markdown(f"**👤 User:** {ticket_data['usuario']}")
+                    st.markdown(f"**💬 Query:** {ticket_data['consulta'][:100]}...")
                     
                     resultado = ticket_data['resultado']
                     
-                    # Mostrar progreso del procesamiento
-                    st.subheader("🔄 Procesamiento:")
+                    st.subheader("🔄 Processing:")
                     for paso in ticket_data['historial']:
                         st.text(paso)
                     
-                    # Información de categorización
                     if resultado.get('categoria'):
-                        st.markdown(f"**📂 Categoría:** {resultado['categoria']}")
+                        st.markdown(f"**📂 Category:** {resultado['categoria']}")
                     
-                    # Información del RAG
                     if resultado.get('confianza', 0) > 0:
                         confidence = resultado['confianza']
-                        st.markdown(f"**🎯 Confianza RAG:** {confidence:.2f}")
+                        st.markdown(f"**🎯 RAG Confidence:** {confidence:.2f}")
                         
-                        # Barra de progreso visual
                         progress_color = "green" if confidence >= 0.65 else "orange" if confidence >= 0.4 else "red"
                         st.progress(confidence)
                         
-                        # Mostrar fuentes consultadas
                         if resultado.get('fuentes'):
-                            st.markdown(f"**📚 Fuentes:** {', '.join(resultado['fuentes'])}")
+                            st.markdown(f"**📚 Sources:** {', '.join(resultado['fuentes'])}")
                     
-                    # Human-in-the-loop
                     if resultado.get('requiere_humano') and not resultado.get('respuesta_final'):
-                        st.warning("👨‍💼 Requiere intervención humana")
+                        st.warning("👨‍💼 Requires human intervention")
                         
-                        # Mostrar contexto para el agente
                         if resultado.get('respuesta_rag'):
-                            with st.expander("📋 Contexto para el agente"):
+                            with st.expander("📋 Context for agent"):
                                 st.text(resultado['respuesta_rag'])
                         
                         respuesta_humano = st.text_area(
-                            "✍️ Respuesta del agente:",
+                            "✍️ Agent response:",
                             key=f"respuesta_{ticket_id}",
                             height=100,
-                            placeholder="Escribe la respuesta para el usuario..."
+                            placeholder="Write the response for the user..."
                         )
                         
                         col_btn1, col_btn2 = st.columns(2)
                         
                         with col_btn1:
-                            if st.button(f"💾 Enviar Respuesta", key=f"btn_{ticket_id}"):
+                            if st.button(f"💾 Submit Response", key=f"btn_{ticket_id}"):
                                 if respuesta_humano.strip():
-                                    # Actualizar estado con respuesta humana
                                     config = ticket_data['config']
                                     st.session_state.helpdesk.update_state(
                                         config,
                                         {"respuesta_humano": respuesta_humano}
                                     )
                                     
-                                    # Continuar procesamiento
                                     for chunk in st.session_state.helpdesk.stream(None, config=config, stream_mode="updates"):
                                         for nodo, salida in chunk.items():
                                             if "historial" in salida and salida["historial"]:
                                                 ticket_data['historial'].extend(salida["historial"])
                                     
-                                    # Actualizar estado final
                                     estado_final = st.session_state.helpdesk.get_state(config)
                                     ticket_data['resultado'] = estado_final.values
                                     
-                                    st.success("✅ Respuesta procesada")
+                                    st.success("✅ Response processed")
                                     st.rerun()
                                 else:
-                                    st.warning("⚠️ Escribe una respuesta antes de enviar")
+                                    st.warning("⚠️ Write a response before submitting")
                         
                         with col_btn2:
-                            if st.button(f"🔄 Usar RAG", key=f"rag_{ticket_id}"):
-                                # Usar la respuesta RAG como base
+                            if st.button(f"🔄 Use RAG", key=f"rag_{ticket_id}"):
                                 respuesta_rag = resultado.get('respuesta_rag', '')
                                 config = ticket_data['config']
                                 st.session_state.helpdesk.update_state(
@@ -265,7 +243,6 @@ def main():
                                     {"respuesta_humano": respuesta_rag}
                                 )
                                 
-                                # Continuar procesamiento
                                 for chunk in st.session_state.helpdesk.stream(None, config=config, stream_mode="updates"):
                                     for nodo, salida in chunk.items():
                                         if "historial" in salida and salida["historial"]:
@@ -274,32 +251,27 @@ def main():
                                 estado_final = st.session_state.helpdesk.get_state(config)
                                 ticket_data['resultado'] = estado_final.values
                                 
-                                st.success("✅ Respuesta RAG aplicada")
+                                st.success("✅ RAG response applied")
                                 st.rerun()
                     
-                    # Respuesta final
                     elif resultado.get('respuesta_final'):
-                        st.success("✅ Ticket Resuelto")
-                        st.markdown("**💬 Respuesta:**")
+                        st.success("✅ Ticket Resolved")
+                        st.markdown("**💬 Response:**")
                         
-                        # Formatear respuesta con fuentes
                         respuesta = resultado['respuesta_final']
                         st.info(respuesta)
                         
-                        # Métricas de resolución
                         col_m1, col_m2, col_m3 = st.columns(3)
                         with col_m1:
-                            st.metric("🎯 Confianza", f"{resultado.get('confianza', 0):.2f}")
+                            st.metric("🎯 Confidence", f"{resultado.get('confianza', 0):.2f}")
                         with col_m2:
-                            st.metric("🔍 Fuentes", len(resultado.get('fuentes', [])))
+                            st.metric("🔍 Sources", len(resultado.get('fuentes', [])))
                         with col_m3:
-                            resolucion = "RAG" if not resultado.get('requiere_humano') else "Humano"
-                            st.metric("🤖 Resuelto por", resolucion)
+                            resolucion = "RAG" if not resultado.get('requiere_humano') else "Human"
+                            st.metric("🤖 Resolved by", resolucion)
     
-    # Footer con estadísticas
     st.markdown("---")
     if st.session_state.tickets:
-        # Calcular estadísticas
         total_tickets = len(st.session_state.tickets)
         resueltos_rag = sum(1 for t in st.session_state.tickets.values() 
                            if t['resultado'].get('respuesta_final') and not t['resultado'].get('requiere_humano'))
@@ -311,11 +283,11 @@ def main():
         with col_stat1:
             st.metric("📊 Total Tickets", total_tickets)
         with col_stat2:
-            st.metric("🤖 Resueltos por RAG", resueltos_rag)
+            st.metric("🤖 Resolved by RAG", resueltos_rag)
         with col_stat3:
-            st.metric("👨‍💼 Resueltos por Humano", resueltos_humano)
+            st.metric("👨‍💼 Resolved by Human", resueltos_humano)
         with col_stat4:
-            st.metric("⏳ Pendientes", pendientes)
+            st.metric("⏳ Pending", pendientes)
     
     st.markdown(
         """

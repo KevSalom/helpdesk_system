@@ -1,45 +1,45 @@
-# Preguntas Frecuentes (FAQ)
+# Frequently Asked Questions (FAQ)
 
-## Acceso y Contraseñas
+## Access and Passwords
 
-### ¿Cómo reseteo mi contraseña?
-Para resetear tu contraseña sigue estos pasos:
-1. Ve a la página de login de la aplicación
-2. Haz click en el enlace "Olvidé mi contraseña"
-3. Ingresa tu dirección de email registrada
-4. Revisa tu correo electrónico y sigue las instrucciones
-5. Crea una nueva contraseña segura
+### How do I reset my password?
+To reset your password follow these steps:
+1. Go to the application login page
+2. Click on the "Forgot my password" link
+3. Enter your registered email address
+4. Check your email and follow the instructions
+5. Create a new secure password
 
-**Tiempo estimado:** 2-3 minutos
+**Estimated time:** 2-3 minutes
 
-### No puedo acceder a mi cuenta
-Si no puedes acceder a tu cuenta:
-- Verifica que estés usando el email correcto
-- Asegúrate de que tu contraseña sea correcta
-- Prueba resetear tu contraseña
-- Verifica que tu cuenta no esté suspendida
-- Si el problema persiste, contacta soporte
+### I can't access my account
+If you can't access your account:
+- Verify you are using the correct email
+- Make sure your password is correct
+- Try resetting your password
+- Verify your account is not suspended
+- If the problem persists, contact support
 
-## Gestión de Planes y Facturación
+## Plan Management and Billing
 
-### ¿Cómo actualizo mi plan?
-Para cambiar tu plan actual:
-1. Inicia sesión en tu cuenta
-2. Ve a Configuración > Plan y Facturación
-3. Selecciona el nuevo plan que deseas
-4. Confirma el cambio y método de pago
-5. El cambio será efectivo inmediatamente
+### How do I update my plan?
+To change your current plan:
+1. Sign in to your account
+2. Go to Settings > Plan and Billing
+3. Select the new plan you want
+4. Confirm the change and payment method
+5. The change will be effective immediately
 
-### ¿Cómo cancelo mi suscripción?
-Para cancelar tu suscripción:
-1. Ve a Configuración > Facturación
-2. Busca la sección "Gestionar Suscripción"
-3. Haz click en "Cancelar suscripción"
-4. Confirma la cancelación
-5. Tu acceso continuará hasta el final del período pagado
+### How do I cancel my subscription?
+To cancel your subscription:
+1. Go to Settings > Billing
+2. Find the "Manage Subscription" section
+3. Click "Cancel subscription"
+4. Confirm the cancellation
+5. Your access will continue until the end of the paid period
 
-### ¿Puedo obtener un reembolso?
-- Los reembolsos se procesan dentro de los primeros 30 días
-- Contacta soporte con tu solicitud detallada
-- Se evaluará cada caso individualmente
-- Los reembolsos parciales están disponibles en casos especiales
+### Can I get a refund?
+- Refunds are processed within the first 30 days
+- Contact support with your detailed request
+- Each case will be evaluated individually
+- Partial refunds are available in special cases
