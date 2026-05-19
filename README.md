@@ -2,6 +2,16 @@
 
 Intelligent helpdesk system based on LangGraph with vector search (RAG) using ChromaDB.
 
+## Features
+
+- 🎫 **Ticket Management** - Create and track support tickets
+- 🔍 **RAG Vector Search** - Semantic search in knowledge base
+- 🤖 **Automatic Classification** - Auto-categorizes tickets as automatic or escalated
+- 👨‍💼 **Human-in-the-Loop** - Escalation system for complex issues
+- 💾 **State Persistence** - SQLite checkpointing for conversation state
+- 📊 **Confidence Scoring** - RAG confidence-based routing
+- 🔄 **Streaming Updates** - Real-time progress tracking
+
 ## Description
 
 Helpdesk 2.0 is an intelligent technical support system that uses:
