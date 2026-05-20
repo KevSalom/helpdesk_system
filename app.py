@@ -6,7 +6,7 @@ from datetime import datetime
 import os
 
 st.set_page_config(
-    page_title="Helpdesk 2.0 con RAG y Interrupt Before",
+    page_title="Helpdesk 2.0 with RAG and Interrupt Before (Spanish)",
     page_icon="🎧",
     layout="wide"
 )
@@ -68,7 +68,7 @@ def procesar_consulta(consulta: str, ticket_id: str):
         return None, [], None, False
 
 def main():
-    st.title("🎧 Helpdesk 2.0 Con interrupt_before")
+    st.title("🎧 Helpdesk 2.0 - RAG and Interrupt Before (Spanish)")
     st.markdown("*Sistema con pausa en nodo esperar_humano*")
     
     rag_configurado = verificar_rag_setup()
@@ -120,7 +120,7 @@ def main():
         
         with st.expander("💡 Ejemplos"):
             ejemplos = [
-                "No puedo resetear mi contraseña",
+                "Cómo restablezco mi contraseña?",
                 "Error 500 en la aplicación",
                 "¿Cómo cancelo mi suscripción?",
                 "La aplicación va muy lenta"
